@@ -175,6 +175,35 @@
   }
   </script>
 </head>
+<style>
+  /* Make entire gist responsive and centered */
+  .gist-container {
+    width: 100%;
+    max-width: 1000px; /* optional — limit width */
+  }
+
+  /* Override GitHub’s default narrow left alignment */
+  .gist-container .gist {
+    width: 100% !important;
+  }
+
+  .gist-container .gist-file {
+    width: 100% !important;
+  }
+
+  .gist-container .gist-data {
+    width: 100% !important;
+  }
+
+  .gist-container .blob-wrapper.data {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .gist-container table {
+    width: 100% !important;
+  }
+</style>
 <body>
 
 
@@ -316,7 +345,7 @@
         <div class="box has-text-justified">
           <h3 class="title is-4">Sequence Prediction</h3>
           <p>
-            Description or content for the first demo goes here. This could include text, links, or images.
+            We used sequences generated from transformations of the sine function, specifically a \cdot \sin(bx) and a^x \cdot \sin(bx), within the range [0, 2\pi] as our training examples. These sequences were provided to Gemini-2.5-Flash (with reasoning mode disabled), along with a sample test sequence extending beyond 2\pi. The model was then tasked with continuing the sequence by generating the next 100 values based on the given patterns.
           </p>
         </div>
       </div>
@@ -325,7 +354,12 @@
       <div class="column is-half">
         <div class="box has-text-justified">
           <h3 class="title is-4">Example</h3>
-          <p>
+            <div style="display: flex; justify-content: center;">
+              <div class="gist-container">
+                <script src="https://gist.github.com/hsiang-fu/54245548ba26f217deb9b072ca1a56a4.js"></script>
+              </div>
+            </div>
+            <p>
             Description or content for the second demo goes here. You can also include buttons or media.
           </p>
         </div>

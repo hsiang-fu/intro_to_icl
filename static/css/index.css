@@ -404,6 +404,25 @@ code {
   gap: 0.5rem;
 }
 
+.gist {
+  background: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.gist .gist-file {
+  border: none !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+.gist .gist-data {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
 .copy-bibtex-btn:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
