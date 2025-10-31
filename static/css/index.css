@@ -373,6 +373,9 @@ pre {
   font-size: 0.9rem !important;
   overflow-x: auto;
   box-shadow: var(--shadow-sm);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 }
 
 code {
@@ -404,10 +407,10 @@ code {
   gap: 0.5rem;
 }
 
-pre code {
-        white-space: pre-wrap; 
-        word-wrap: break-word; 
-    }
+code {
+    white-space: pre-wrap; 
+    word-wrap: break-word; 
+}
 
 .gist {
    max-width:100%;
