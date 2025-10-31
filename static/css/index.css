@@ -406,7 +406,7 @@ code {
   gap: 0.5rem;
 }
 
-code {
+pre code {
     white-space: pre-wrap; 
     word-wrap: break-word; 
 }
