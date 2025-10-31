@@ -376,7 +376,6 @@ pre {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-}
 
 code {
   background: var(--background-accent) !important;
