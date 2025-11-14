@@ -261,15 +261,155 @@
 
 
 <!-- Paper abstract -->
-<section class="section hero is-light">
+<section class="section hero is-white">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Introduction</h2>
-        <div class="content has-text-justified">
+      <div class="column is-six-sevenths">
+        
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified" style="align-items: stretch;">
           <p>
-            In-Context Learning (ICL) enables large language models (LLMs) to adapt their behavior and perform new tasks without updating their internal parameters, such as weights and biases. Instead of retraining or reprogramming the model with large datasets, ICL allows it to learn “on the fly” by using examples, instructions, or demonstrations provided in the input. This approach leverages the model’s pretrained knowledge to complete new tasks simply by showing examples of how those tasks should be performed. LLMs can recognize and complete abstract patterns by observing input-output examples and can even extrapolate functions from these sequences, demonstrating their ability to generalize through pattern learning rather than parameter updates (Mirchandani et al.).
+            In-Context Learning (ICL) is a method that allows large language models (LLMs) to learn new tasks without changing their internal parameters like weights or biases. Instead of retraining or modifying the model, we simply provide examples and instructions <em>inside</em> the input, and the model adapts its behavior on the fly [2]. 
           </p>
+          <p>
+            You can think of ICL as a form of “learning by showing.” When we give the model sample input-output pairs, it identifies the patterns and continues them. It's similar to how a child copies a simple block-stacking pattern after seeing it only a few times. This lets the model generalize to new tasks using only a few examples, without needing traditional training.
+          </p>
+        </div>
+        <br>
+        <h2 class="title is-3">How does In-Context Learning Work?</h2>
+        <div class="content has-text-justified" style="align-items: stretch;">
+          <p>
+            LLMs learn from examples by reading them as part of the input. The model looks for patterns, relationships, or rules that connect the example inputs to their corresponding outputs. Once it detects these patterns, it applies them to new information that's provided.
+          </p>
+
+          <h3 class="title is-4">1. The Model Reads Examples Like a Story</h3>
+          <p>
+            When we give a sequence of examples, the model processes them just like reading sentences. For example:
+          </p>
+          <pre><code>1 → 2<br>2 → 4<br>3 → 6<br>What about 4?</code></pre>
+          <p>
+            The model sees the pattern—multiplying by two—and uses it to continue.
+          </p>
+
+          <h3 class="title is-4">2. The Model Detects Patterns</h3>
+          <p>
+            Thanks to the massive pretraining of LLMs, the model develops strong pattern recognition abilities. During ICL, it uses those abilities to identify similarities across examples and infer the rule being demonstrated. These rules can involve numbers, text transformations, reasoning steps, or even abstract visual structures.
+          </p>
+
+          <h3 class="title is-4">3. The Model Completes the Pattern</h3>
+          <p>
+            After recognizing the pattern, the model continues it. For example:
+          </p>
+          <pre>Translate to French: <br> cat → chat <br> dog → chien <br> bird → oiseau <br> horse → ?</pre>
+          <p>
+            The model responds with the appropriate continuation of the pattern.
+          </p>
+
+          <h3 class="title is-4">4. No Training Required</h3>
+          <p>
+            Most importantly, the model isn’t being retrained. Its parameters stay the same. ICL works because the model uses its existing knowledge to match the patterns shown in the examples, making it feel adaptive even without any weight updates.
+          </p>
+        </div>
+
+        <h2 class="title is-3">Simple Analogy</h2>
+        <div class="content has-text-justified" style="align-items: stretch;">
+          <p>
+            Imagine showing a child three different drawings:
+          </p>
+          <pre>🍎 + 🍎 = 2 apples <br>🍌 + 🍌 = 2 bananas <br>🍊 + 🍊 = 2 oranges</pre>
+          <p>
+            If you then show:
+          </p>
+          <pre>🍇 + 🍇 = ?</pre>
+          <p>
+            The child would be able to easily continue the same pattern: <strong>2 grapes</strong><br>
+            ICL works the same way: show, observe, follow.
+          </p>
+        </div>
+        <br>
+        <h2 class="title is-3">Why Is In-Context Learning Important?</h2>
+        <div class="content has-text-justified" style="align-items: stretch;">
+          <p><b>Let's compare traditional ML approaches with in-context learning</b></p>
+          <h3 class="title is-4">Traditional Machine Learning: “Learn First, Use Later”</h3>
+          <p>
+            In traditional machine learning, the process is divided into two major phases. The first phase is
+            <strong>training</strong>, where the model uses a large training dataset to adjust—and continually update—its
+            internal parameters, such as weights and biases. This optimization process is computationally expensive and
+            can take hours, days, or even weeks.
+          </p>
+          <figure>
+            <img src="static/images/traditional_ml.png" alt="Traditional Machine Learning Diagram" style="width: 100%; max-width: 500px; height: auto;">
+            <figcaption style="font-size: 15px;">Figure 1: Traditional ML involves two phases—training and inference.</figcaption>
+          </figure>
+          <b>Step 1: Training the Model</b>
+          <ul>
+            <li>A large training dataset is fed into the model.</li>
+            <li>The model adjusts its internal parameters (weights and biases) over many cycles.</li>
+            <li>The goal is to find the optimal set of parameters that allow the model to make good predictions.</li>
+            <li>This step is slow, computationally heavy, and usually done only once before deployment.</li>
+          </ul>
+          <b>Think of this like a student studying for a final exam:</b>
+          <ul><li>They ① read books, ② take notes, ③ do practice problems, and ④ slowly update their understanding over time.</li></ul>
+          <b>Step 2: Inference</b>
+          <ul>
+            <li>Once the model is fully trained, it receives a new input query.</li>
+            <li>It does not change its parameters anymore.</li>
+            <li>Instead, it uses the knowledge stored in its trained weights to produce a model output.</li>
+            <li>The model relies solely on what it learned during the training phase.</li>
+          </ul>
+          <b>Think of this like a student taking a final exam:</b>
+          <ul><li>① No more studying and ② the student must rely on what they learned earlier.</li></ul>
+
+          <h3 class="title is-4">In-Context Learning: “Learn While You Read”</h3>
+          <p>
+            In contrast, In-Context Learning (ICL) allows a model to adapt its behavior <em>during</em> inference without
+            modifying its internal parameters. Instead of retraining the model, we provide examples, instructions, or
+            demonstrations directly inside the input prompt. These elements become the “context” that guides the model’s
+            reasoning.
+          </p>
+          <figure>
+            <img src="static/images/icl.png" alt="In-Context Learning Diagram" style="width: 100%; max-width: 500px; height: auto;">
+            <figcaption style="font-size: 15px;">Figure 2: ICL adapts behavior using context, with no parameter updates.</figcaption>
+          </figure>
+
+          <b>Instead of training the model again, we give it context directly inside the input, which includes:</b>
+          <ul>
+            <li>Examples</li>
+            <li>Instructions</li>
+            <li>Demonstrations</li>
+            <li>The User's Query</li>
+          </ul>
+          <p>Then, the model uses pretrained knowledge (everything it learned during its original training), the examples we give in the prompt, and the current input query, combines them during inferenceto produce both an output and sometimes an explanation.</p>
+          <p>Unlike traditional ML, ICL does not update the model’s weights, instead, everything happens “in the moment,” inside the prompt window.</p>
+          <b>This is like giving a student a cheat sheet during an exam:</b>
+          <ul><li>① They don’t update their long-term memory but ② can follow the examples provided to solve the problem.</li></ul>
+          <p>
+            The model uses a combination of its pretrained knowledge, the examples provided in the prompt, and the user’s
+            input query to generate both an output and, optionally, an explanation. Importantly, the model’s parameters
+            remain unchanged. All adaptation happens dynamically inside the context window.
+          </p>
+
+          <h3 class="title is-4">Key Differences</h3>
+          <ul>
+            <li><strong>Traditional ML:</strong> Learning happens during training; inference just applies what was learned.</li>
+            <li><strong>ICL:</strong> Learning-like behavior happens during inference using contextual examples.</li>
+            <li><strong>Traditional ML:</strong> Requires updating parameters to learn new tasks.</li>
+            <li><strong>ICL:</strong> No retraining needed—just change the prompt.</li>
+            <li><strong>Traditional ML:</strong> Adaptation is slow and computationally heavy.</li>
+            <li><strong>ICL:</strong> Adaptation is instant and flexible.</li>
+          </ul>
+          <p>
+            A useful way to think about the difference is this: Traditional ML requires “studying ahead of time,” while
+            ICL allows the model to “learn from examples in the moment.”
+          </p>
+          <h3 class="title is-4">Summary and Key Insights</h3>
+          <p><b>ICL offers several advantage over traditional approaches:</b></p>
+          <ul>
+            <li><strong>Fast adaptation:</strong> The model can instantly perform new tasks.</li>
+            <li><strong>No retraining risk:</strong> Nothing about the model’s core parameters changes.</li>
+            <li><strong>Flexible across formats:</strong> Works with text, numbers, code, and even abstract patterns.</li>
+            <li><strong>Efficient demonstrations:</strong> A few examples (even one!) can be enough.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -281,24 +421,53 @@
 <section class="section hero is-white">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Overview</h2>
+      <div class="column is-six-sevenths">
+        <h2 class="title is-3">A Simple In-Context Learning Demo</h2>
+        <p>or</p>
+        <br>
+        <h2 class="title is-3">Getting Started with a Simple Demo</h2>
+        
         <div class="content has-text-justified">
           <p>
-            This introduction will present a series of interactive demos that showcase how In-Context Learning (ICL) can be applied to sequence prediction, sequence transformation, _____, and _______. Each demo illustrates how large language models (specifically Google Gemini’s models) can infer rules, patterns, or relationships directly from zero-shot, few-shot, or many shot examples—without explicit retraining or fine-tuning.
+            This demo<sup>1</sup> shows an example of how a large language model (LLM) can learn from examples to complete a pattern. It uses tasks from the Abstract and Reasoning Corpus<sup>2</sup> (ARC), which contain small grids that follow certain rules.
           </p>
           <p>
-            In the <strong>sequence prediction</strong> demos, the model learns to anticipate the next element in a pattern based on preceding examples, such as predicting numerical progressions in sine functions with transformations, or predicting time-based trends such as blood sugar levels throughout the data. 
+            For each task, we provide the model with three input–output examples that show how the pattern works. We then give it a new test input and ask the Gemini 2.5-Flash model to produce the correct output grid by following the same rule seen in the examples.
           </p>
           <p>
-            The <strong>sequence transformation</strong> demo highlight the model’s ability to map one sequence to another—for instance, converting input patterns into structured output patterns, translating formats, or filling in blanks of input patterns to match trends found in other patterns.
+            In the example image below, you can use the arrows to browse through the input–output examples and see the model’s generated results.
           </p>
-          <p>
-            # add more tasks + descriptions
-          </p>
-          <p>
-            Together, these demonstrations emphasize the adaptability and reasoning capabilities of modern language models. By observing only a handful of examples, they can internalize task logic and apply it to new, unseen data—mimicking human learning from context.
-          </p>
+          <div style="text-align:center; margin-top: 1.5rem;">
+              <figure style="max-width: 500px; margin: 0 auto;">
+                <img id="displayedImage" src="static/images/sequence_transformation_1.png" alt="Sequence Transformation Examples" style="border-radius: 10px; object-fit: cover;">
+              </figure>
+
+              <div class="buttons is-centered" style="margin-top: 1rem;">
+                <button class="button is-dark is-rounded" onclick="updateGlobalIndex(-1)">
+                  <span class="icon"><i class="fa fa-arrow-left"></i></span>
+                </button>
+
+                <pre id="objectiveText" class="button is-static is-rounded" style="font-family: monospace;">Task One</pre>
+
+                <button class="button is-dark is-rounded" onclick="updateGlobalIndex(1)">
+                  <span class="icon"><i class="fa fa-arrow-right"></i></span>
+                </button>
+              </div>
+            </div>
+            <br>
+            <div align="center">
+              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark" style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+                <span class="icon">
+                  <i class="fa fa-file"></i>
+                </span>
+                <span>Try the Full Demo @ Google Colab</span>
+              </a>
+            </div>
+            <br>
+          <div style="font-size: 0.75em;">
+            <div><sup>1</sup> This demo is inspired by <i>Large Language Models as General Pattern Machines</i> [2], which examines how LLMs can identify and generalize visual and abstract patterns.</div>
+            <div><sup>2</sup> <i>The ARC dataset</i> [1], introduced by François Chollet, is designed to evaluate abstract reasoning and few-shot generalization—key components of human-like intelligence. ARC avoids dependence on prior knowledge, making it a strong test of an LLM’s ability to learn patterns from scratch.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -307,9 +476,256 @@
 <!-- End paper Overview -->
 
 <!-- Paper Demos -->
-<section class="section hero is-light">
+<section class="section hero is-white">
   <div class="container">
     <h2 class="title is-3 has-text-centered">Demos</h2>
+    <div class="columns is-multiline">
+
+      <!-- Block 1 -->
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Sine Function Prediction</h3>
+          <img src="static/images/sequence_completion_axsin(bx).gif" alt="a⋅x⋅sin(bx)">
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 2 -->
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 2</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 3</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 4</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 5</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 6</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 7</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 8</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 9</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 10</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 11</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fourth">
+        <div class="box has-text-justified" style="height: 100%;">
+          <h3 class="title is-4">Demo 12</h3>
+          <p>test goes here</p>
+
+          <br>
+          <div align="center">
+            <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing"
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark"
+              style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
+              <span class="icon">
+                <i class="fa fa-file"></i>
+              </span>
+              <span>Try the Demo Here @ Google Colab</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Repeat for all 13 blocks -->
+
+    </div>
+
     <div class="columns is-multiline is-variable is-6" style="align-items: stretch;">
       
       <!-- Left Column -->
@@ -317,15 +733,19 @@
         <div class="box has-text-justified" style="height: 100%;">
           <h3 class="title is-4">Sequence Prediction</h3>
           <p>
-            This demo is inspired by the concepts presented in <em>Large Language Models as General Pattern Machines</em> [2], which explores the capacity of Large Language Models (LLMs) to recognize and generalize visual and abstract patterns.
+            This demo is inspired by <em>Large Language Models as General Pattern Machines</em> [2], which explores how Large Language Models (LLMs) can identify and generalize both visual and abstract patterns.
           </p>
           <br>
           <p>
-            In this demo, we utilized a collection of numerical sequences derived from transformations of the sine function as the “training” examples for the Large Language Model (LLM). For the function a⋅x⋅sin(bx) and a⋅sin(bx), the model was provided with 10 example sequences generated from uniformly sampled x-values within the range [0, 2π], capturing one complete periodic cycle of the sine wave. 
+            In this demo, we’re going to test how well an LLM can recognize and extend mathematical patterns, specifically those derived from the sine function. We can start by creating a set of numerical sequences based on the sine function — specifically <strong>a⋅x⋅sin(bx)</strong> and <strong>a⋅sin(bx)</strong>. For each function, we will generate 10 example sequences using x-values uniformly sampled from the range [0, π].
           </p>
           <br>
           <p>
-            For both functions, the sequences were then input into the <strong>Gemini 2.5-Flash</strong> model, with reasoning mode turned off to focus on direct pattern continuation rather than higher-level inference. In addition to the training examples, a user-defined test sequence extending beyond the 2π interval was provided to assess the model’s ability to extrapolate and maintain the periodic characteristics of the sine function. Finally, the model was prompted to generate 50, 100, or 200 additional values for each test sequence, demonstrating its capacity to recognize, generalize, and extend the learned sinusoidal patterns.
+            Next, let’s feed these sequences into the <strong>Gemini 2.5-Flash</strong> model. We’ll disable reasoning mode so the model focuses purely on continuing numerical patterns rather than performing abstract reasoning. Along with the training examples, we will also include a custom test sequence that goes slightly beyond the π interval. This helps test whether the model can continue the sine-like behavior even outside the range it was “trained” on, without the context or equation of the true sine function.
+          </p>
+          <br>
+          <p>
+            Finally, we can ask the model to generate 50, 100, or 200 additional values that continue the test sequence naturally. These steps and results demonstrate how the LLM can recognize, generalize, and extend sinusoidal patterns learned from the provided examples.
           </p>
           <br>
           <h3 class="title is-4">Prompt Example</h3>
@@ -358,20 +778,20 @@ No explanations, no code, no comments — only the list.
           <h3 class="title is-4">Example of Demo</h3>
             <img src="static/images/sequence_completion_axsin(bx).gif" alt="a⋅x⋅sin(bx)">
               <p>
-              For the function <strong>a⋅x⋅sin(bx)</strong>, the model is given initial examples (gray curve) — representing the known part of the sequence — and is then asked to make predictions of the pattern (red curve) beyond the known range of the sequence. The dashed gray curve serves as the ground truth of the sequence. 
-              </p>
+              For the function <strong>a⋅x⋅sin(bx)</strong>, the initial example we provide to the model is shown by the gray curve, which represents the known part of the sequence. We then ask the model to predict the next 50, 100, or 200 values beyond the known range—shown by the red curve. The dashed gray curve represents the ground-truth continuation of the pattern.
+            </p>
             <br>
             <img src="static/images/sequence_completion_asin(bx).gif" alt="a⋅sin(bx)">
               <p>
-              For the function <strong>a⋅sin(bx)</strong>, the model is given initial examples (gray curve) — representing the known part of the sequence — and is then asked to make predictions of the pattern (red curve) beyond the known range of the sequence. The dashed gray curve serves as the ground truth of the sequence. 
+              For the function <strong>a⋅sin(bx)</strong>, the initial example we provide to the model is shown by the gray curve, which represents the known part of the sequence. We then ask the model to predict the next 50, 100, or 200 values beyond the known range—shown by the red curve. The dashed gray curve represents the ground-truth continuation of the pattern.
               </p>
             <br>
               <p>
-              By adjusting the amplitude and frequency parameters in the demo, the user can explore how LLMs understand the underlying mathematical relationship and predict future values based on the provided examples.
-              </p>
+              In the demo, you can adjust the frequency and amplitude settings when prompted, allowing you to see how the LLM interprets the underlying mathematical pattern and predicts future values based on the provided examples.
+            </p>
             <br>
               <div align="center">
-              <a href="https://colab.research.google.com/drive/1GSsmx1Ms5-RnfafRm6qGohgaVgyrSi0W?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
+              <a href="https://colab.research.google.com/drive/1GSsmx1Ms5-RnfafRm6qGohgaVgyrSi0W?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark" style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
                 <span class="icon">
                   <i class="fa fa-file"></i>
                 </span>
@@ -386,15 +806,23 @@ No explanations, no code, no comments — only the list.
         <div class="box has-text-justified" style="height: 100%;">
           <h3 class="title is-4">Glucose Level Prediction</h3>
           <p>
-            In this demo, we utilized a collection of full daily time-series sequences, consisting of paired glucose measurements and corresponding meal logs, as the "training" examples for the Large Language Model (LLM). The data captured the complex time-series dependencies between meals and subsequent glucose response.
+            In this demo, we utilize a collection of full daily time-series sequences—each containing paired glucose measurements and meal logs—as the “training” examples for our Large Language Model (LLM). These sequences capture the natural dependencies between meals and the resulting glucose responses, giving the model a rich foundation to learn from.
           </p>
           <br>
           <p>
-            For the tasks of predicting future glucose levels with and without explicit mention of the <strong>Glycemic Index</strong>. The model was given the same sequence data for both tasks, but the prompt was augmented with an explicit instruction to use the Glycemic Index or without the Glycemic Index information—to inform its predictions.
+            Next, we run two prediction tasks: one with explicit Glycemic Index (GI) information and one without it. In both cases, the underlying sequence data stays the same; what changes is the prompt. For the GI-aware version, we augment the prompt with instructions telling the model to consider GI values when predicting future glucose levels. For the GI-agnostic version, we simply remove that guidance.
           </p>
           <br>
           <p>
-            For both prediction tasks, the daily sequences and step-by-step context were then input into the Gemini 2.0 Flash model, with reasoning mode turned off to focus on direct pattern continuation rather than higher-level inference. In addition to the training examples, a test sequence representing a future target day of prediction points was provided to assess the model’s ability to extrapolate the learned time-series patterns with the incoporation of meal details. Finally, the model was prompted to generate one additional value at a time in a sequential prediction loop until the entire target day was predicted, demonstrating its capacity to recognize, generalize, and extend the learned time-series patterns, with results being compared to a Baseline Model (Gaussian Process Regression) and evaluated using the Root Mean Squared Error and Mean Squared Error.
+            For both tasks, we feed the daily sequences and step-by-step context into the Gemini 2.0 Flash model. We keep reasoning mode turned off so the model focuses on direct pattern continuation rather than higher-level interpretation. Alongside the training examples, we also provide a test sequence representing a future day we want the model to predict.
+          </p>
+          <br>
+          <p>
+            To generate the full set of predictions for this target day, we ask the model to produce one value at a time, looping sequentially until the entire day's glucose curve is completed. This lets us evaluate how well the model can recognize, generalize, and extend the patterns it learned from the earlier sequences—both with and without GI guidance.
+          </p>
+          <br>
+          <p>
+            Finally, we compare the LLM’s output to a Baseline Model (Gaussian Process Regression) and evaluate performance using Root Mean Squared Error (RMSE) and Mean Squared Error (MSE).
           </p>
           <br>
           <h3 class="title is-4">Prompt Example</h3>
@@ -447,26 +875,26 @@ No extra text, no explanations, no code, only the list.
         <div class="box has-text-justified" style="height: 100%;">
           <h3 class="title is-4">Example of Demo</h3>
             <img src="static/images/glucose_prediction_1.png" alt="w/ mention of Glycemic Index">
-              <p>
-              By <strong>incorporating</strong> the Glycemic Index, <strong>Gemini-2.0-Flash</strong> uses the provided examples, test sequence, and food data to iteratively predict the patient’s glucose level at each subsequent time point, continuing this process until the end of the day.
+            <p>
+              By <strong>incorporating</strong> the Glycemic Index, we guide Gemini-2.0-Flash to use the provided examples, the test sequence, and the associated food data to iteratively predict the patient’s glucose level at each subsequent time point. The model continues this step-by-step prediction process until it reaches the end of the day.
             </p>
             <br>
             <img src="static/images/glucose_prediction_2.png" alt="w/o mention of Glycemic Index">
               <p>
-              By <strong>excluding</strong> the Glycemic Index, <strong>Gemini-2.0-Flash</strong> relies solely on the provided examples, test sequence, and food data to iteratively predict the patient’s glucose level at each subsequent time point, continuing this process until the end of the day.
+              By <strong>excluding</strong> the Glycemic Index, we prompt Gemini-2.0-Flash to rely solely on the provided examples, the test sequence, and the food data to iteratively predict the patient’s glucose level at each subsequent time point. The model continues this step-by-step prediction process until it reaches the end of the day.
             </p>
             <br>
             <img src="static/images/glucose_prediction_3.png" alt="Baseline Gaussian Process Regression Model">
-              <p>
-              For the <strong>Baseline Gaussian Process Regression</strong> (GPR) model, predictions are generated solely from the training data, which consist of the patient’s glucose level measurements. The model forecasts glucose levels throughout the day at predefined time markers.
+            <p>
+              For the <strong>Baseline Gaussian Process Regression</strong> (GPR) model, we generate predictions using only the training data, which consist of the patient’s glucose measurements. The model then forecasts glucose levels throughout the day at predefined time points.
             </p>
             <br>
-              <p>
-              By selecting the number of days to include as examples in the demo, users can explore how LLMs leverage food-related data, in combination with semantic cues, to predict future values in time-dependent datasets based on the provided examples.
+            <p>
+              In the demo, you can select the number of days to include as examples in the demo, and explore how LLMs leverage food-related data, in combination with semantic cues, to predict future values in time-dependent datasets based on the provided examples.
             </p>
             <br>
             <div align="center">
-              <a href="https://colab.research.google.com/drive/1H9d4L6nRtwdMAzK74TMEHPhXP1jiWOwB?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
+              <a href="https://colab.research.google.com/drive/1H9d4L6nRtwdMAzK74TMEHPhXP1jiWOwB?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark" style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
                 <span class="icon">
                   <i class="fa fa-file"></i>
                 </span>
@@ -525,287 +953,7 @@ No extra text, no explanations, no code, only the list.
           </p>
             <br>
             <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 4</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-            
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 5</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-            
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 6</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-            
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 7</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-            
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 8</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-            
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 9</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 10</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 11</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 12</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
-        </div>
-      </div>
-
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Demo 13</h3>
-          <p>
-          test goes here
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <p>
-            text goes here
-            </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">
+              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark" style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
                 <span class="icon">
                   <i class="fa fa-file"></i>
                 </span>
