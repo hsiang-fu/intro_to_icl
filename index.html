@@ -195,15 +195,15 @@
             <div class="is-size-5 publication-authors">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">
-                <a href="https://www.linkedin.com/in/hsiangfu" target="_blank" style="color: #8C1D40 !important;">Hsiang Fu</a><sup>1</sup>,</span>
+                <a href="https://www.linkedin.com/in/hsiangfu" target="_blank" style="color: #8C1D40 !important;">Hsiang Fu</a>,</span>
               <span class="author-block">
-                <a href="https://henibenamor.weebly.com/" target="_blank" style="color: #8C1D40 !important;">Heni Ben Amor</a><sup>1</sup>,</span>
+                <a href="https://henibenamor.weebly.com/" target="_blank" style="color: #8C1D40 !important;">Heni Ben Amor</a>,</span>
               <span class="author-block">
-                <a href="https://mohamedelmistiri.github.io/" target="_blank" style="color: #8C1D40 !important;">Mohamed El Mistiri</a><sup>1</sup></span>
+                <a href="https://mohamedelmistiri.github.io/" target="_blank" style="color: #8C1D40 !important;">Mohamed El Mistiri</a></span>
             </div>
                   <div class="is-size-5 publication-authors">
                     <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block"><sup>1</sup><a href="https://interactive-robotics.engineering.asu.edu/" target="_blank" style="color: #4a4a4a !important; font-weight: normal !important;">Interactive Robotics Lab, Arizona State University</a></span>
+                    <span class="author-block"><a href="https://interactive-robotics.engineering.asu.edu/" target="_blank" style="color: #4a4a4a !important; font-weight: normal !important;">Interactive Robotics Lab, Arizona State University</a></span>
                     <!-- TODO: Remove this line if no equal contribution -->
                     <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
                   </div>
@@ -270,193 +270,42 @@
         <h2 class="title is-3">Overview</h2>
         <div class="content has-text-justified" style="align-items: stretch;">
           <p>
-            In-Context Learning (ICL) is a powerful method that enables large language models (LLMs) to perform new tasks without modifying any of their internal parameters. Traditionally, LLMs are used as simple oracles: we pose a question, and they provide an answer. Recent work, however, shows that when we supply curated examples and engage the model iteratively, it can explore a broader solution space and progressively refine its reasoning. Unlike conventional machine learning pipelines—which rely on retraining, gradient updates, or fine-tuning on new datasets—ICL operates entirely through the input prompt. By embedding instructions, examples, or demonstrations directly into the text, we guide the model to infer patterns and adjust its output behavior dynamically. In this sense, the model “learns” in real time during the interaction, rather than through an offline training process<sup>[2]</sup>.
+            In this website, we introduce the core ideas behind in-context learning and provide interactive demos (hosted on Google Colab) that let you experiment with ICL step by step.
           </p>
           <p>
-            One way to understand ICL is to think of it as “learning by showing.” When we present the model with a few input–output pairs that illustrate the task, the model analyzes the structure of the examples—how the inputs are transformed, what relationships matter, and what rules appear to be operating. Then, when faced with a new but related query, it extends or completes the pattern it has detected. For instance, if we show a few examples of converting informal text into formal prose, labeling sentiment, extracting key information, or solving a math pattern, the model can immediately generalize the behavior even with only a handful of samples.
+            In-Context Learning (ICL) is a method that enables large language models (LLMs) to perform new tasks without changing any of their internal parameters. Instead of retraining or fine-tuning, we simply provide instructions and examples directly in the prompt. The model interprets these demonstrations, detects the underlying patterns, and applies them to new inputs in real time. One way to think of ICL as “learning by showing.” When we supply a few sample input–output pairs, the model analyzes how the inputs were transformed and what rules seem to govern them. It then extends the same pattern to new queries—whether the task is rewriting text, extracting information, classifying sentiment, or solving a reasoning problem. Much like a child copying a block-stacking pattern after watching a few examples, the model uses its pre-training to generalize from the demonstrations we provide.
           </p>
-          <p>
-            A useful analogy is a child observing a simple block-stacking pattern. After watching someone arrange the blocks a few times, the child does not need a full explanation of physics or geometry to replicate the behavior—they simply infer the pattern from the demonstrations. Similarly, LLMs rely on their vast pre-training knowledge to interpret the examples we provide and map them to the task at hand. The examples in the prompt act as contextual training data, and the model leverages its internal representations to align with those examples, even though its core parameters remain unchanged.
-          </p>
-          <p>Since ICL requires no training pipeline, it offers flexibility and efficiency. It allows rapid iteration, adapts to a wide range of tasks, and supports few-shot or even zero-shot generalization. This capability is one of the reasons modern LLMs are so versatile: they can flexibly shift between tasks—from classification and reasoning to translation and summarization—simply by receiving the right context.</p>
+          <p>Since ICL requires no training pipeline, it’s flexible, efficient, and ideal for rapid experimentation. This is what allows modern LLMs to shift seamlessly between tasks—classification, translation, summarization, reasoning—based solely on the context they are given.</p>
         </div>
         <br>
-        <h2 class="title is-3">How does In-Context Learning Work?</h2>
-        <div class="content has-text-justified" style="align-items: stretch;">
-          <p>
-            LLMs learn from examples by reading them as part of the input. The model looks for patterns, relationships, or rules that connect the example inputs to their corresponding outputs. Once it detects these patterns, it applies them to new information that's provided.
-          </p>
-
-          <h3 class="title is-4">1. The Model Reads Examples Like a Story</h3>
-          <p>
-            When we give a sequence of examples, the model processes them just like reading sentences in a story. For example:
-          </p>
-          <pre><code>1 → 2<br>2 → 4<br>3 → 6<br>4 → ?</code></pre>
-          <p>
-            The model processes these in order, identifies the underlying pattern—multiplying by two—and in this case, uses that pattern to generate the appropriate continuation, which would be 8.
-          </p>
-
-          <h3 class="title is-4">2. The Model Detects Patterns</h3>
-          <p>
-            After being trained on vast and varied datasets, LLMs develop strong and highly flexible pattern-recognition abilities. During ICL, the model draws on this internal knowledge to compare the examples it’s given, noticing subtle relationships in structure, meaning, or logic. From there, it infers the underlying rule or process being demonstrated—whether that rule involves numerical relationships, text-to-text transformations, multi-step reasoning patterns, or even abstract visual or spatial structures. In essence, the model generalizes from the demonstration much like a human would: by recognizing what stays consistent across examples, identifying what changes, and mapping those insights onto the new input. This ability to fluidly extract patterns allows LLMs to perform new tasks on the fly without explicit retraining or access to labeled datasets.
-          </p>
-
-          <h3 class="title is-4">3. The Model Completes the Pattern</h3>
-          <p>
-            After recognizing the pattern, the model continues it by applying the inferred rule to the new input. Once the relationship between the examples is clear, the model extends that logic in a consistent and coherent way. For example:
-          </p>
-          <pre>Translate to French: <br> cat → chat <br> dog → chien <br> bird → oiseau <br> horse → ?</pre>
-          <p>
-            Because it has identified that each English word is being mapped to its French equivalent, the model fills in the missing piece—horse → cheval—thereby completing the demonstrated pattern. This process is not limited to language translation; the same mechanism applies to mathematical sequences, stylistic transformations, logical reasoning steps, and many other pattern-based tasks.
-          </p>
-
-          <h3 class="title is-4">4. No Training Required</h3>
-          <p>
-            Most importantly, the model <strong>isn’t being retrained</strong>. Its parameters remain completely unchanged throughout the process. Instead of updating its weights, the model leverages the knowledge and structures it already acquired during pretraining. ICL works because the model uses this internal understanding to align with the patterns demonstrated in the examples, effectively simulating task adaptation on the fly, making it feel adaptive even without any weight updates.
-          </p>
-        </div>
-
-        <h2 class="title is-3">Simple Analogy</h2>
-        <div class="content has-text-justified" style="align-items: stretch;">
-          <p>
-            Imagine showing a child three different drawings:
-          </p>
-          <pre>🍎 + 🍎 = 2 apples <br>🍌 + 🍌 = 2 bananas <br>🍊 + 🍊 = 2 oranges</pre>
-          <p>
-            After seeing these examples, the child understands the pattern: 1 fruit + 1 fruit → “2 fruit”.
-          </p>
-          <pre>🍇 + 🍇 = ?</pre>
-          <p>
-            The child can easily continue the pattern and answer: 2 grapes. <br>
-            ICL works the same way. You provide a few demonstrations, the model observes the structure or rule they share, and then it follows that pattern for the new input. It’s not learning new information—it’s simply recognizing and extending the pattern you just showed.
-          </p>
-        </div>
-        <br>
-        <h2 class="title is-3">In-Context Learning vs. Traditional ML</h2>
-        <div class="content has-text-justified" style="align-items: stretch;">
-          <h3 class="title is-4">Traditional Machine Learning: “Learn First, Use Later”</h3>
-          <p>
-            In traditional machine learning, the process is divided into two major phases. The first phase is
-            <strong>training</strong>, where the model uses a large training dataset to adjust—and continually update—its
-            internal parameters, such as weights and biases. This optimization process is computationally expensive and
-            can take hours, days, or even weeks.
-          </p>
-          <figure>
-            <img src="static/images/traditional_ml.png" alt="Traditional Machine Learning Diagram" style="width: 100%; max-width: 500px; height: auto;">
-            <figcaption style="font-size: 15px;">Figure 1: Traditional ML involves two phases—training and inference.</figcaption>
-          </figure>
-          <b>Step 1: Training the Model</b>
-          <p>
-            In this phase, a large dataset is fed into the model, and its internal parameters—weights and biases—are adjusted over many training cycles. The objective is to learn an optimal set of parameters that enables the model to make accurate predictions across a wide range of inputs. Because this optimization process is slow and computationally intensive, it is typically performed only once prior to deployment.
-          </p>
-          <b>Think of this like a student studying for a final exam:</b>
-          <ul><li>They ① read books, ② take notes, ③ do practice problems, and ④ slowly update their understanding over time.</li></ul>
-          <b>Step 2: Inference</b>
-          <p>
-            After the model has been fully trained, it receives new input queries and generates outputs without altering any of its parameters. Instead, it relies entirely on the knowledge encoded in its trained weights to produce predictions or responses. At this stage, the model’s behavior is fixed, drawing solely on what it learned during the training phase.
-          </p>
-          <b>Think of this like a student taking a final exam:</b>
-          <ul><li>They ① can't study anymore and ② must rely on what they learned earlier.</li></ul>
-
-          <h3 class="title is-4">In-Context Learning: “Learn While You Read”</h3>
-          <p>
-            In contrast, In-Context Learning (ICL) allows a model to adapt its behavior <em>during</em> inference without
-            modifying its internal parameters. Instead of retraining the model, we provide examples, instructions, or
-            demonstrations directly inside the input prompt. These elements become the “context” that guides the model’s
-            reasoning.
-          </p>
-          <figure>
-            <img src="static/images/icl.png" alt="In-Context Learning Diagram" style="width: 100%; max-width: 500px; height: auto;">
-            <figcaption style="font-size: 15px;">Figure 2: ICL adapts behavior using context, with no parameter updates.</figcaption>
-          </figure>
-
-          <p>
-            Instead of retraining the model, we provide it with context directly inside the input prompt—such as examples, instructions, demonstrations, and the user’s query. The model then draws on its pretrained knowledge, the examples included in the prompt, and the current input to combine all of this information during inference, generating both an output and, in some cases, an explanation. Unlike traditional machine learning approaches, In-Context Learning does not update the model’s weights; everything happens dynamically “in the moment” within the prompt window.
-          </p>
-          <b>Think of this like giving a student a cheat sheet during an exam:</b>
-          <ul><li>① They don’t update their long-term memory but ② can follow the examples provided to solve the problem.</li></ul>
-          <p>
-            The model uses a combination of its pretrained knowledge, the examples provided in the prompt, and the user’s
-            input query to generate both an output and, optionally, an explanation. Importantly, the model’s parameters
-            remain unchanged. All adaptation happens dynamically inside the context window.
-          </p>
-
-          <h3 class="title is-4">Summary & Key Differences</h3>
-          <p>
-            Traditional machine learning and in-context learning differ fundamentally in how they adapt to new tasks. In traditional ML, learning happens during training, and inference simply applies whatever the model learned previously; updating the model for new tasks requires adjusting its parameters, which is slow and computationally intensive. In contrast, ICL exhibits learning-like behavior during inference by using contextual examples, meaning no retraining is needed—changing the prompt is enough to adapt the model to new situations. A helpful way to think about this distinction is that traditional ML requires “studying ahead of time,” while ICL enables the model to “learn from examples in the moment.”
-          </p>
-          <p>
-            ICL offers several advantages over traditional approaches. It enables fast adaptation, allowing the model to perform new tasks instantly without retraining. Because the model’s parameters remain unchanged, there is no risk associated with altering its core behavior. ICL is also highly flexible, working across text, numbers, code, and even abstract patterns, and it often requires only a small number of demonstrations—sometimes just a single example—to be effective.
-          </p>
-        </div>
       </div>
     </div>
   </div>
+<div class="column has-text-centered">
+  <div class="publication-links">
+    <span class="link-block" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+
+      <span class="title is-4" style="margin: 0;">Step 1:</span>
+
+      <a href="intro.html" target="_blank"
+         class="external-link button is-normal is-rounded is-dark">
+        <span class="icon">
+          <i class="fas fa-terminal"></i>
+        </span>
+        <span>Click Here to Learn More about In-Context Learning</span>
+      </a>
+
+    </span>
+  </div>
+</div>
 </section>
 <!-- End paper abstract -->
-
-<!-- Paper Overview -->
-<section class="section hero is-white">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-sevenths">
-        <h2 class="title is-3">A Simple In-Context Learning Demo (move to different website)</h2>
-        <p>or</p>
-        <br>
-        <h2 class="title is-3">Getting Started with a Simple Demo</h2>
-        
-        <div class="content has-text-justified">
-          <p>
-            This demo<sup>1</sup> shows an example of how a large language model (LLM) can learn from examples to complete a pattern. It uses tasks from the Abstract and Reasoning Corpus<sup>2</sup> (ARC), which contain small grids that follow certain rules.
-          </p>
-          <p>
-            For each task, we provide the model with three input–output examples that show how the pattern works. We then give it a new test input and ask the Gemini 2.5-Flash model to produce the correct output grid by following the same rule seen in the examples.
-          </p>
-          <p>
-            In the example image below, you can use the arrows to browse through the input–output examples and see the model’s generated results.
-          </p>
-          <div style="text-align:center; margin-top: 1.5rem;">
-              <figure style="max-width: 500px; margin: 0 auto;">
-                <img id="displayedImage" src="static/images/sequence_transformation_1.png" alt="Sequence Transformation Examples" style="border-radius: 10px; object-fit: cover;">
-              </figure>
-
-              <div class="buttons is-centered" style="margin-top: 1rem;">
-                <button class="button is-dark is-rounded" onclick="updateGlobalIndex(-1)">
-                  <span class="icon"><i class="fa fa-arrow-left"></i></span>
-                </button>
-
-                <pre id="objectiveText" class="button is-static is-rounded" style="font-family: monospace;">Task One</pre>
-
-                <button class="button is-dark is-rounded" onclick="updateGlobalIndex(1)">
-                  <span class="icon"><i class="fa fa-arrow-right"></i></span>
-                </button>
-              </div>
-            </div>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark" style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Full Tutorial Here</span>
-              </a>
-            </div>
-            <br>
-          <div style="font-size: 0.75em;">
-            <div><sup>1</sup> This demo is inspired by <i>Large Language Models as General Pattern Machines</i> [2], which examines how LLMs can identify and generalize visual and abstract patterns.</div>
-            <div><sup>2</sup> <i>The ARC dataset</i> [1], introduced by François Chollet, is designed to evaluate abstract reasoning and few-shot generalization—key components of human-like intelligence. ARC avoids dependence on prior knowledge, making it a strong test of an LLM’s ability to learn patterns from scratch.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper Overview -->
 
 <!-- Paper Demos -->
 <section class="section hero is-white">
   <div class="container">
     <h2 class="title is-3 has-text-centered">Demos</h2>
+    <p>demo body</p>
     <div class="columns is-multiline">
 
       <div class="column is-one-fourth">
