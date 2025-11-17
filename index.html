@@ -74,7 +74,7 @@
 
 
   <!-- TODO: Replace with your paper title and authors -->
-  <title>Introduction to In-Context Learning (ASU IRL)</title>
+  <title>Introduction to In-Context Learning (ASU Interactive Robotics Lab)</title>
   
   <!-- Favicon and App Icons -->
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
@@ -100,7 +100,7 @@
   </noscript>
   
   <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   
   <!-- Defer non-critical JavaScript -->
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -185,8 +185,8 @@
   </button>
 
   <main id="main-content">
-  <section class="hero" >
-    <div class="hero-body">
+  <section class="nerd" >
+    <div class="nerd-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
@@ -195,13 +195,15 @@
             <div class="is-size-5 publication-authors">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">
-                <a href="https://www.linkedin.com/in/hsiangfu" target="_blank">Hsiang Fu</a>,</span>
-                <span class="author-block">
-                  <a href="https://henibenamor.weebly.com/" target="_blank">Heni Ben Amor</a></span>
-                  </div>
+                <a href="https://www.linkedin.com/in/hsiangfu" target="_blank" style="color: #8C1D40 !important;">Hsiang Fu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://henibenamor.weebly.com/" target="_blank" style="color: #8C1D40 !important;">Heni Ben Amor</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://mohamedelmistiri.github.io/" target="_blank" style="color: #8C1D40 !important;">Mohamed El Mistiri</a><sup>1</sup></span>
+            </div>
                   <div class="is-size-5 publication-authors">
                     <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block">Interactive Robotics Lab<br>Arizona State University</span>
+                    <span class="author-block"><sup>1</sup><a href="https://interactive-robotics.engineering.asu.edu/" target="_blank" style="color: #4a4a4a !important; font-weight: normal !important;">Interactive Robotics Lab, Arizona State University</a></span>
                     <!-- TODO: Remove this line if no equal contribution -->
                     <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
                   </div>
@@ -268,11 +270,15 @@
         <h2 class="title is-3">Overview</h2>
         <div class="content has-text-justified" style="align-items: stretch;">
           <p>
-            In-Context Learning (ICL) is a method that allows large language models (LLMs) to learn new tasks without changing their internal parameters like weights or biases. Instead of retraining or modifying the model, we simply provide examples and instructions <em>inside</em> the input, and the model adapts its behavior on the fly [2]. 
+            In-Context Learning (ICL) is a powerful method that enables large language models (LLMs) to perform new tasks without altering any of their internal parameters, such as weights or biases. Unlike traditional machine learning, which requires explicit retraining, gradient updates, or fine-tuning on new datasets, ICL works entirely through the input prompt. By embedding instructions, examples, or demonstrations directly in the input text, we guide the model to infer the underlying pattern and adapt its output behavior dynamically. In this sense, the model’s “learning” happens in real time, during the interaction, rather than through an offline training step.
           </p>
           <p>
-            You can think of ICL as a form of “learning by showing.” When we give the model sample input-output pairs, it identifies the patterns and continues them. It's similar to how a child copies a simple block-stacking pattern after seeing it only a few times. This lets the model generalize to new tasks using only a few examples, without needing traditional training.
+            One way to understand ICL is to think of it as “learning by showing.” When we present the model with a few input–output pairs that illustrate the task, the model analyzes the structure of the examples—how the inputs are transformed, what relationships matter, and what rules appear to be operating. Then, when faced with a new but related query, it extends or completes the pattern it has detected. For instance, if we show a few examples of converting informal text into formal prose, labeling sentiment, extracting key information, or solving a math pattern, the model can immediately generalize the behavior even with only a handful of samples.
           </p>
+          <p>
+            A useful analogy is a child observing a simple block-stacking pattern. After watching someone arrange the blocks a few times, the child does not need a full explanation of physics or geometry to replicate the behavior—they simply infer the pattern from the demonstrations. Similarly, LLMs rely on their vast pre-training knowledge to interpret the examples we provide and map them to the task at hand. The examples in the prompt act as contextual training data, and the model leverages its internal representations to align with those examples, even though its core parameters remain unchanged.
+          </p>
+          <p>Since ICL requires no training pipeline, it offers flexibility and efficiency. It allows rapid iteration, adapts to a wide range of tasks, and supports few-shot or even zero-shot generalization. This capability is one of the reasons modern LLMs are so versatile: they can flexibly shift between tasks—from classification and reasoning to translation and summarization—simply by receiving the right context.</p>
         </div>
         <br>
         <h2 class="title is-3">How does In-Context Learning Work?</h2>
