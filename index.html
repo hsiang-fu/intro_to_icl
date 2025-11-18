@@ -317,10 +317,10 @@
   <div class="container has-text-centered">
     <br>
 
-      <span style="display:inline-block; width:40px; height:4px; background:#FF4D4D; border-radius:2px; vertical-align:middle;"></span> - Sequence/Pattern Learning<span>&emsp;</span>|<span>&emsp;</span>
-      <span style="display:inline-block; width:40px; height:4px; background:#FFB84D; border-radius:2px; vertical-align:middle;"></span> - Prediction & Regression<span>&emsp;</span>|<span>&emsp;</span>
-      <span style="display:inline-block; width:40px; height:4px; background:#7DD87D; border-radius:2px; vertical-align:middle;"></span> - Classification<span>&emsp;</span>|<span>&emsp;</span>
-      <span style="display:inline-block; width:40px; height:4px; background:#6DA8FF; border-radius:2px; vertical-align:middle;"></span> - Reinforcement Learning & Numerical Optimization using ICL
+      <span style="display:inline-block; width:60px; height:4px; background:#FF4D4D; border-radius:2px; vertical-align:middle;"></span> - Sequence/Pattern Learning<span>&emsp;</span>|<span>&emsp;</span>
+      <span style="display:inline-block; width:60px; height:4px; background:#FFB84D; border-radius:2px; vertical-align:middle;"></span> - Prediction & Regression<span>&emsp;</span>|<span>&emsp;</span>
+      <span style="display:inline-block; width:60px; height:4px; background:#7DD87D; border-radius:2px; vertical-align:middle;"></span> - Classification<span>&emsp;</span>|<span>&emsp;</span>
+      <span style="display:inline-block; width:60px; height:4px; background:#6DA8FF; border-radius:2px; vertical-align:middle;"></span> - Reinforcement Learning & Numerical Optimization using ICL
     <br>
     <br>
     <br>
@@ -370,7 +370,7 @@
       <div class="column is-one-fourth">
         <div class="box has-text-centered" style="height: 100%;">
           <h3 class="title is-10 has-text-centered">Movie Translation</h3>
-          <img src="static/images/placeholder.gif" alt="placeholder">
+          <img src="static/images/translation.png" alt="movie_translation" style="height: 150px;">
           <p>Fictional Movie Language Translation (Avatar, LotR, Star Trek, GoT)</p>
 
           <br>
@@ -390,8 +390,8 @@
 
       <div class="column is-one-fourth">
         <div class="box has-text-centered" style="height: 100%;">
-          <h3 class="title is-11 has-text-centered">Glucose Level Forecast</h3>
-          <img src="static/images/placeholder.gif" alt="placeholder">
+          <h3 class="title is-11 has-text-centered" >Glucose Level Forecast</h3>
+          <img src="static/images/glucose_prediction_1.png" alt="placeholder" style="height: 170px;">
           <p>Glucose Level Time Series Prediction</p>
 
           <br>
@@ -412,7 +412,8 @@
       <div class="column is-one-fourth">
         <div class="box has-text-centered" style="height: 100%;">
           <h3 class="title is-14 has-text-centered">PiD Tuning</h3>
-          <p>image goes here</p>
+          <img src="static/images/pid_tuning.png" alt="pid_tuning" style="height: 170px;">
+          <p>PiD Controller Tuning using ICL</p>
 
           <br>
           <div align="center">
@@ -432,7 +433,8 @@
       <div class="column is-one-fourth">
         <div class="box has-text-centered" style="height: 100%;">
           <h3 class="title is-12 has-text-centered">Binary Classification</h3>
-          <p>image goes here</p>
+          <img src="static/images/binary_classification.png" alt="placeholder" style="height: 150px;">
+          <p>Binary Classification using Quality of Hazelnuts</p>
 
           <br>
           <div align="center">
@@ -494,7 +496,8 @@
       <div class="column is-one-fourth">
         <div class="box has-text-centered" style="height: 100%;">
           <h3 class="title is-14 has-text-centered">ProPS</h3>
-          <p>image goes here</p>
+          <img src="static/images/mountain_car.gif" alt="props" style="height: 150px;">
+          <p>Utilization of Prompted Policy Search on MountainCar-v0</p>
 
           <br>
           <div align="center">
@@ -514,7 +517,8 @@
       <div class="column is-one-fourth">
         <div class="box has-text-centered" style="height: 100%;">
           <h3 class="title is-14 has-text-centered">ProPS+</h3>
-          <p>image goes here</p>
+          <img src="static/images/swimmer.gif" alt="props+" style="height: 150px;">
+          <p>Utilization of Prompted Policy Search + Envrionment Description on Swimmer-v5</p>
 
           <br>
           <div align="center">
@@ -534,7 +538,8 @@
       <div class="column is-one-fourth">
         <div class="box has-text-centered" style="height: 100%;">
           <h3 class="title is-14 has-text-centered">SAS-Prompt</h3>
-          <p>image goes here</p>
+          <img src="static/images/golf_robot.gif" alt="sas_prompt" style="height: 150px;">
+          <p>Implementation of SAS-Prompt using Golf Simulation</p>
 
           <br>
           <div align="center">
@@ -758,64 +763,6 @@ No extra text, no explanations, no code, only the list.
               </a>
             </div>
           
-        </div>
-      </div>
-
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Seqeunce Transformation</h3>
-          <p>
-            This demo is inspired by the concepts presented in <em>Large Language Models as General Pattern Machines</em> [2], which explores the capacity of Large Language Models (LLMs) to recognize and generalize visual and abstract patterns.
-          </p>
-          <br
-          <p>
-            In this demo, we utilized the Abstract and Reasoning Corpus (ARC) as the source of pattern-based examples for the Large Language Model (LLM). For the ARC tasks, the model was provided with three input–output examples, visually capturing the transformation rules required to solve the task.
-          </p>
-          <br>
-          <p>
-            The input-output examples were then input into the Gemini 2.5-Flash model, with reasoning mode turned off to focus on direct pattern recognition and application rather than higher-level inference. In addition to the three to four training examples, a test input pattern was provided to assess the model’s ability to extrapolate and apply the observed visual transformation rules to a novel case. Finally, the model was prompted to generate the single corresponding output grid for the test input, demonstrating the capacity of LLMs to recognize, generalize, and execute the learned visual transformation pattern.
-          </p>
-          <br>
-          <p>
-            The Abstraction and Reasoning Corpus (ARC) is a distinctive benchmark introduced in 2019 by Google AI researcher François Chollet to measure AI skill acquisition and progress toward human-level artificial general intelligence (AGI). Unlike traditional benchmarks, ARC assesses abstract reasoning and the ability to generalize from just a few examples , which mirrors the way humans quickly learn new concepts. It stands apart because it does not rely on specific, pre-trained knowledge, making it a robust test of an AI's fluid intelligence [1].
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="column is-half">
-        <div class="box has-text-justified" style="height: 100%;">
-          <h3 class="title is-4">Example of Demo</h3>
-            <div style="text-align:center; margin-top: 1.5rem;">
-              <figure style="max-width: 500px; margin: 0 auto;">
-                <img id="displayedImage" src="static/images/sequence_transformation_1.png" alt="Sequence Transformation Examples" style="border-radius: 10px; object-fit: cover;">
-              </figure>
-
-              <div class="buttons is-centered" style="margin-top: 1rem;">
-                <button class="button is-dark is-rounded" onclick="updateGlobalIndex(-1)">
-                  <span class="icon"><i class="fa fa-arrow-left"></i></span>
-                </button>
-
-                <pre id="objectiveText" class="button is-static is-rounded" style="font-family: monospace;">Task One</pre>
-
-                <button class="button is-dark is-rounded" onclick="updateGlobalIndex(1)">
-                  <span class="icon"><i class="fa fa-arrow-right"></i></span>
-                </button>
-              </div>
-            </div>
-            <br>
-            <p>
-            Users can select the patterns/tasks they would like <strong>Gemini-2.5 Flash</strong> to transform or complete, and explore how this powerful LLM leverages simple input-output examples, in combination with its linguistic understanding, to generalize the underlying rule and generate accurate outputs based on the pattern learned from those examples.
-          </p>
-            <br>
-            <div align="center">
-              <a href="https://colab.research.google.com/drive/1buA3TM0VWCR_8x3KT0ZzQnt0uEt3poIa?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark" style="box-shadow: 0 4px 8px rgba(0,0,0,0.25);">
-                <span class="icon">
-                  <i class="fa fa-file"></i>
-                </span>
-                <span>Try the Demo Here @ Google Colab</span>
-              </a>
-            </div>
         </div>
       </div>
     </div>
