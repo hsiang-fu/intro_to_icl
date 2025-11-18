@@ -391,6 +391,7 @@ body {
   font-weight: 700 !important;
   color: var(--text-primary);
 }
+
 /* categories */
 /* Sequence & Pattern Learning */
 .title.is-10 {
@@ -409,7 +410,7 @@ body {
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: #ff0000;
+  background: #FF4D4D;
   border-radius: 2px;
 }
 /* Prediction & Regression */
@@ -429,7 +430,7 @@ body {
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: #2fff00;
+  background: #FFB84D;
   border-radius: 2px;
 }
 /* Classification */
@@ -449,30 +450,10 @@ body {
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: #00bfff;
+  background: #7DD87D;
   border-radius: 2px;
 }
-/* Control & Tuning */
-.title.is-13 {
-  font-family: 'Inter', sans-serif !important;
-  font-size:1.5rem;
-  color: var(--text-primary);
-  margin-bottom: 2rem !important;
-  position: relative;
-  padding-bottom: 1rem;
-}
-.title.is-13::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background: #ee00ff;
-  border-radius: 2px;
-}
-/* Reinforcement Learning via ICL */
+/* Reinforcement Learning & Numerical Optimization via ICL */
 .title.is-14 {
   font-family: 'Inter', sans-serif !important;
   font-size:1.5rem;
@@ -489,27 +470,7 @@ body {
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: #00ffb7;
-  border-radius: 2px;
-}
-/* Numerical Opimization Problems */
-.title.is-15 {
-  font-family: 'Inter', sans-serif !important;
-  font-size:1.5rem;
-  color: var(--text-primary);
-  margin-bottom: 2rem !important;
-  position: relative;
-  padding-bottom: 1rem;
-}
-.title.is-15::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background: #ffa200;
+  background: #6DA8FF;
   border-radius: 2px;
 }
 
