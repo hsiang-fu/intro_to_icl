@@ -2375,6 +2375,9 @@ a.tag:hover{
 .title.is-7{
   font-size:.75rem
 }
+.title.is-9{
+  font-size:2rem
+}
 .subtitle{
   color:#4a4a4a;
   font-size:1.25rem;
